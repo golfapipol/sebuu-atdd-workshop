@@ -17,8 +17,15 @@ let products = [
 let orders = {}
 
 app.get('/api/v1/products', (req, res) => {
+    if (req.query.q) {
+        res.json({
+            list: products.filter(p => p.name.includes(req.query.q))
+        })
+        return
+    }
+
     res.json({
-        list: products.filter(p => p.name.includes(req.query.q))
+        list: products
     })
 })
 
