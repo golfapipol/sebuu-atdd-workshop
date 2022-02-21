@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "c79fdac2-f320-44aa-8cf2-c347eac5e579",
+		"name": "SPC3 - ซื้อ 1 ชิ้น กทม ems debit.ktb รับnofi sms ชำระเงิน",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product - ดึงข้อมูลสินค้า",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลสินค้า\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.product[0].name).to.eql(\"IKEA ตุ๊กตา\");\r",
+							"    pm.expect(data.product[0].product_price).to.eql(\"200\");\r",
+							"    pm.expect(data.product[0].quantity).to.eql(\"10\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://a-tatda.com/products/ikea-ตุ๊กตา?username=wantana",
+					"protocol": "https",
+					"host": [
+						"a-tatda",
+						"com"
+					],
+					"path": [
+						"products",
+						"ikea-ตุ๊กตา"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "wantana"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product - ดึงข้อมูลตัวเลือกสินค้า",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลสินค้า\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.product[0].detail).to.eql(\"ตุ๊กตาหมาโกลเด้น\");\r",
+							"    pm.expect(data.product[0].product_price).to.eql(\"200\");\r",
+							"    pm.expect(data.product[0].quantity).to.eql(\"10\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://a-tatda.com/products/ikea-ตุ๊กตา/?product_id=2820893951&username=wantana",
+					"protocol": "https",
+					"host": [
+						"a-tatda",
+						"com"
+					],
+					"path": [
+						"products",
+						"ikea-ตุ๊กตา",
+						""
+					],
+					"query": [
+						{
+							"key": "product_id",
+							"value": "2820893951"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product - ดึงข้อมูลรายละเอียดสินค้า",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลสินค้า\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.product[0].name).to.eql(\"IKEA ตุ๊กตา\");\r",
+							"    pm.expect(data.product[0].detail).to.eql(\"ตุ๊กตาหมาโกลเด้น 40cm\");\r",
+							"    pm.expect(data.product[0].product_price).to.eql(\"200\");\r",
+							"    pm.expect(data.product[0].quantity).to.eql(\"10\");\r",
+							"    pm.expect(data.product[0].catagery).to.eql(\"ตุ๊กตา\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://a-tatda.com/products/ikea-ตุ๊กตา/?product_id=2820893951&username=wantana",
+					"protocol": "https",
+					"host": [
+						"a-tatda",
+						"com"
+					],
+					"path": [
+						"products",
+						"ikea-ตุ๊กตา",
+						""
+					],
+					"query": [
+						{
+							"key": "product_id",
+							"value": "2820893951"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart order - สั่งสินค้า",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\":\"1\",\r\n    \"detail\":\"สีน้ําตาลอ่อน ขนาด 40 cm\",\r\n    \"product_price\":\"200.00\",\r\n    \"shipping\":\"EMS\",\r\n    \"shipping_price\":\"55.00\",\r\n    \"name_bank\":\"Debit KTB\",\r\n    \"notification_id\":\"N03\",\r\n    \"total_price\":\"255\",\r\n    \"address_id\":\"A001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "?username=wantana&product_id=2820893951",
+					"query": [
+						{
+							"key": "username",
+							"value": "wantana"
+						},
+						{
+							"key": "product_id",
+							"value": "2820893951"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart Order - ดึงข้อมูลคำสั่งซื้อ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลสินค้า\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.product[0].amount).to.eql(\"1\");\r",
+							"    pm.expect(data.product[0].detail).to.eql(\"ตุ๊กตาหมาโกลเด้น 40cm\");\r",
+							"    pm.expect(data.product[0].product_price).to.eql(\"200\");\r",
+							"});\r",
+							"//product arrayy\r",
+							"//order object\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลออเดอร์\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.order.order_id).to.eql(\"21111117ve6ap36\");\r",
+							"    pm.expect(data.order.shipping).to.eql(\"EMS\");\r",
+							"    pm.expect(data.order.shipping_price).to.eql(\"55\"); \r",
+							"    pm.expect(data.order.total_price).to.eql(\"255\");\r",
+							"    pm.expect(data.order.address_id).to.eql(\"A001\"); \r",
+							"    pm.expect(data.order.notification).to.eql(\"N03\");   \r",
+							"    pm.expect(data.order.order_time).to.eql(\"18-11-2021 19:00\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "?address_id=A001&product_id=2820893951&username=wantana&notification_id=N03",
+					"query": [
+						{
+							"key": "address_id",
+							"value": "A001"
+						},
+						{
+							"key": "product_id",
+							"value": "2820893951"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						},
+						{
+							"key": "notification_id",
+							"value": "N03",
+							"description": "ไม่รับแจ้งเตือน"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Address - ดึงข้อมูลที่อยู่",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลจากPayment\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.address.prefix).to.eql(\"ดร.\");\r",
+							"    pm.expect(data.address.firstname).to.eql(\"อธิตา\");\r",
+							"    pm.expect(data.address.lastname).to.eql(\"อ่อนเอื้อน\");\r",
+							"    pm.expect(data.address.phone_number).to.eql(\"0995312454\");\r",
+							"    pm.expect(data.address.shipping_address).to.eql(\"1/321 ซ.สุขุมวิท\");\r",
+							"    pm.expect(data.address.shipping_sub_district).to.eql(\"ทองหล่อ\");\r",
+							"    pm.expect(data.address.shipping_district).to.eql(\"ทองหล่อ\");\r",
+							"    pm.expect(data.address.shipping_province).to.eql(\"กรุงเทพมหานคร\");\r",
+							"    pm.expect(data.address.shipping_zip_code).to.eql(\"10150\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "?address_id=A001&user_id=001&username=wantana&order_id=21111117ve6ap36",
+					"query": [
+						{
+							"key": "address_id",
+							"value": "A001"
+						},
+						{
+							"key": "user_id",
+							"value": "001"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						},
+						{
+							"key": "order_id",
+							"value": "21111117ve6ap36"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notification - ดึงข้อมูลการแจ้งเตือน",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//noti object\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลช่องทางการแจ้งเตือน\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.notification.notification_id).to.eql(\"N03\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "?notification_id=N03&username=wantana&order_id=21111117ve6ap36",
+					"query": [
+						{
+							"key": "notification_id",
+							"value": "N03",
+							"description": "ไม่รับการแจ้งเตือน"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						},
+						{
+							"key": "order_id",
+							"value": "21111117ve6ap36"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment - เลือกวิธีการชำระเงิน",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name_bank\":\"Debit KTB\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "?username=wantana&order_id=21111117ve6ap36",
+					"query": [
+						{
+							"key": "username",
+							"value": "wantana"
+						},
+						{
+							"key": "order_id",
+							"value": "21111117ve6ap36"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment - ดึงวิธีการชำระเงิน",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"ผลลัพท์ต้องมี ข้อมูลช่องทางการแจ้งเตือน\", function () {\r",
+							"    var data = pm.response.json();\r",
+							"    pm.expect(data.notification.name_bank).to.eql(\"Debit KTB\");\r",
+							"    pm.expect(data.notification.card_number).to.eql(\"1234 5678 9123 4567\");\r",
+							"    pm.expect(data.notification.payment_time).to.eql(\"18-11-2021 19:02\");\r",
+							"    pm.expect(data.notification.total_price).to.eql(\"255\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "?order_id=21111117ve6ap36&username=wantana",
+					"query": [
+						{
+							"key": "order_id",
+							"value": "21111117ve6ap36"
+						},
+						{
+							"key": "username",
+							"value": "wantana"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
